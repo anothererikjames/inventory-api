@@ -13,13 +13,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Postman CLI
-        run: npm install -g @postman/cli
+        run: npm install -g postman-cli
 
       - name: Run collection
         env:
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
+          postman login --with-api-key "$POSTMAN_API_KEY"
           postman collection run "52238111-93001f9c-c34f-40d2-858c-d2a55a926177" \
             -e "52238111-83fedf35-a239-4585-9d6b-ff59eacb7aba" \
-            --report-events \
-            --api-key "$POSTMAN_API_KEY"
+            --report-events
